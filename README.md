@@ -1,1 +1,116 @@
 # dgthtxd.github.io
+
+<!-- Widget de chat n8n -->
+
+<style>
+  .chat-launcher {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 12px 18px;
+    border-radius: 999px;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #7b5cff;
+    color: #fff;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    font-size: 14px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    z-index: 9999;
+  }
+
+  .chat-launcher-icon {
+    width: 18px;
+    height: 18px;
+    border-radius: 999px;
+    border: 2px solid #fff;
+    box-sizing: border-box;
+  }
+
+  .chat-window {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    width: 360px;
+    height: 480px;
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 12px 32px rgba(0,0,0,0.25);
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    z-index: 9999;
+  }
+
+  .chat-window.open {
+    display: flex;
+  }
+
+  .chat-window-header {
+    background: #7b5cff;
+    color: #fff;
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .chat-window-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .chat-window-close {
+    cursor: pointer;
+    font-size: 18px;
+    line-height: 1;
+  }
+
+  .chat-window-iframe {
+    border: none;
+    width: 100%;
+    height: 100%;
+  }
+</style>
+
+<!-- Botón flotante -->
+<button id="chatLauncher" class="chat-launcher">
+  <span class="chat-launcher-icon"></span>
+  <span>Chat</span>
+</button>
+
+<!-- Ventana de chat -->
+<div id="chatWindow" class="chat-window">
+  <div class="chat-window-header">
+    <div class="chat-window-title">
+      <span class="chat-launcher-icon" style="border-color:#fff;background:rgba(255,255,255,0.2);"></span>
+      <span>Chat Window</span>
+    </div>
+    <div id="chatClose" class="chat-window-close">&times;</div>
+  </div>
+  <iframe
+    class="chat-window-iframe"
+    src="https://n8n.txdpucp.net/webhook/4b3e48f9-6511-45e8-838a-96845f19947e/chat">
+  </iframe>
+</div>
+
+<script>
+  const launcher = document.getElementById('chatLauncher');
+  const chatWindow = document.getElementById('chatWindow');
+  const chatClose = document.getElementById('chatClose');
+
+  launcher.addEventListener('click', () => {
+    chatWindow.classList.toggle('open');
+  });
+
+  chatClose.addEventListener('click', () => {
+    chatWindow.classList.remove('open');
+  });
+</script>
